@@ -1,0 +1,53 @@
+rules:
+  - id: env-set
+    patterns:
+      - pattern-either:
+          - pattern: |
+              subprocess.check_output([..., "=~/env|set/", ...])
+          - pattern: |
+              subprocess.run([..., "=~/env|set/", ...])
+          - pattern: |
+              subprocess.Popen([..., "=~/env|set/", ...])
+    message: |
+      Reading from env or set commands
+    severity: ERROR
+  - id: python-os-environ
+    patterns:
+      - pattern-either:
+          - pattern: |
+              os.environ
+    message: |
+      Reading from python's os.environ()
+    severity: ERROR
+  - id: python-proc-fs
+    patterns:
+      - pattern-either:
+          - pattern: |
+              pathlib.Path('/proc') / ... / 'environ'
+    message: |
+      Reading python /proc/<pid>/environ
+    severity: ERROR
+  - id: python-proc-fs
+    patterns:
+      - pattern-inside: |
+          $X = {..., "=~/\/etc\/environment|\/etc\/profile|\/etc\/bashrc|~\/.bash_profile|~\/.bashrc|~\/.profile|~\/.cshrc|~\/.zshrc|~\/.tcshrc/", ...}
+          ...
+      - pattern-either:
+          - pattern: |
+              Path(...)
+          - pattern: |
+              open(...)
+    message: |
+      Reading from sensitve files that contain environment variables
+    severity: ERROR
+  - id: libc-environ
+    patterns:
+      - pattern-either:
+          - pattern: |
+              $LIB = ctypes.CDLL(...)
+              ...
+              $Y.in_dll($LIB, 'environ')
+    message: |
+      Reading from libc.environ()
+    severity: ERROR
+

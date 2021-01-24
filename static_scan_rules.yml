@@ -11,14 +11,20 @@ rules:
     message: |
       Reading from env or set commands
     severity: ERROR
+    languages:
+      - python
   - id: python-os-environ
     patterns:
+      - pattern-not: os.environ.get(...)
+      - pattern-not: os.environ[...]
       - pattern-either:
           - pattern: |
               os.environ
     message: |
       Reading from python's os.environ()
     severity: ERROR
+    languages:
+      - python
   - id: python-proc-fs
     patterns:
       - pattern-either:
@@ -27,6 +33,8 @@ rules:
     message: |
       Reading python /proc/<pid>/environ
     severity: ERROR
+    languages:
+      - python
   - id: python-proc-fs
     patterns:
       - pattern-inside: |
@@ -40,6 +48,8 @@ rules:
     message: |
       Reading from sensitve files that contain environment variables
     severity: ERROR
+    languages:
+      - python
   - id: libc-environ
     patterns:
       - pattern-either:
@@ -50,4 +60,5 @@ rules:
     message: |
       Reading from libc.environ()
     severity: ERROR
-
+    languages:
+      - python

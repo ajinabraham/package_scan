@@ -1,0 +1,6 @@
+rsa>=4.7
+biplist>=1.0.3
+bs4>=0.0.1
+colorlog>=4.7.2
+shelljob>=0.6
+-e git://github.com/ajinabraham/poc-rogue.git#egg=poc_rouge

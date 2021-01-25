@@ -47,7 +47,7 @@ def check_cmd(pkg, syscall):
     args = EXEC.search(syscall)
     match_str = args.group()
     if any(cmd in match_str for cmd in BAD_COMMANDS):
-        print(f'\033[91m{pkg} tried to access environment variable by executing {match_str} command during installation.\033[0m')
+        print(f'\033[91m{pkg} tried to access environment variables by executing {match_str} command during installation.\033[0m')
 
 
 def check_connect(pkg, syscall):

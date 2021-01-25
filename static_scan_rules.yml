@@ -35,7 +35,7 @@ rules:
     severity: ERROR
     languages:
       - python
-  - id: python-proc-fs
+  - id: environ-files
     patterns:
       - pattern-inside: |
           $X = {..., "=~/\/etc\/environment|\/etc\/profile|\/etc\/bashrc|~\/.bash_profile|~\/.bashrc|~\/.profile|~\/.cshrc|~\/.zshrc|~\/.tcshrc/", ...}

@@ -58,7 +58,7 @@ rules:
               ...
               $Y.in_dll($LIB, 'environ')
     message: |
-      Reading from libc.environ()
+      Reading from libc.environ
     severity: ERROR
     languages:
       - python

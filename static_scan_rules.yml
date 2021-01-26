@@ -15,8 +15,8 @@ rules:
       - python
   - id: python-os-environ
     patterns:
-      - pattern-not: os.environ.get(...)
-      - pattern-not: os.environ[...]
+      - pattern-not-inside: os.environ.get(...)
+      - pattern-not-inside: os.environ[...]
       - pattern-either:
           - pattern: |
               os.environ
